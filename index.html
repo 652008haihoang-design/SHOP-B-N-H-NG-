@@ -1,0 +1,667 @@
+# SHOP-B-N-H-NG-
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công Ty Tổng Hợp Minh Xuân - Shop Sữa Bỉm & Hàng Tiêu Dùng</title>
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #e6f0fa;
+            --accent-color: #ff6600;
+            --dark-color: #333333;
+            --light-bg: #f8f9fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-color);
+            padding-bottom: 50px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #0052a3, #0073e6);
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo-title h1 {
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-title p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .admin-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* Container Main */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Banner hỗ trợ */
+        .support-banner {
+            background-color: #e3f2fd;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .support-info h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .support-info p {
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .zalo-contact-btn {
+            background-color: #0088ff;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        /* Admin Section */
+        .admin-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: none;
+            border: 2px dashed var(--primary-color);
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .admin-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+
+        .file-input-wrapper {
+            background-color: #f0f4f8;
+            border: 1px dashed #0066cc;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            display: none;
+        }
+
+        .file-input-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        #image-preview {
+            max-width: 100%;
+            height: 120px;
+            object-fit: cover;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        /* Products Grid */
+        .products-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .product-details {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+
+        .product-price {
+            color: var(--accent-color);
+            font-size: 1.15rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .btn-buy {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .btn-delete {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(220, 53, 69, 0.85);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            display: none;
+            font-weight: bold;
+        }
+
+        .admin-active .btn-delete {
+            display: block;
+        }
+
+        /* Order Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 15px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .btn-submit-order {
+            background-color: #0088ff;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-title">
+                <h1>CÔNG TY TỔNG HỢP MINH XUÂN</h1>
+                <p>NVKD: Phương | Điện thoại hỗ trợ: 0988.031.223</p>
+            </div>
+            <button class="admin-btn" onclick="toggleAdmin()">🔑 Quản Lý / Thêm Hàng</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Support Banner -->
+        <div class="support-banner">
+            <div class="support-info">
+                <h3>Tư vấn & Đặt Hàng Trực Tiếp</h3>
+                <p>Nhân viên hỗ trợ: <strong>Phương</strong> - SĐT / Zalo: <strong>0988.031.223</strong></p>
+            </div>
+            <a href="https://zalo.me/0988031223" target="_blank" class="zalo-contact-btn">Chat Zalo Ngay</a>
+        </div>
+
+        <!-- Admin Section -->
+        <div id="admin-panel" class="admin-section">
+            <h2>
+                <span>➕ THÊM SẢN PHẨM MỚI (ĐỒNG BỘ ĐÁM MÂY)</span>
+                <button onclick="toggleAdmin()" style="background:none; border:none; color:red; cursor:pointer;">✖ Đóng</button>
+            </h2>
+            <form id="add-product-form" onsubmit="addNewProduct(event)">
+                <div class="form-grid">
+                    <div>
+                        <div class="form-group">
+                            <label for="prod-name">Tên sản phẩm *</label>
+                            <input type="text" id="prod-name" required placeholder="Nhập tên hàng hóa">
+                        </div>
+                        <div class="form-group">
+                            <label for="prod-price">Giá bán (VNĐ) *</label>
+                            <input type="number" id="prod-price" required placeholder="Nhập giá bán">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label>Hình ảnh sản phẩm *</label>
+                            <div class="file-input-wrapper">
+                                <span class="file-input-btn">📷 Chụp ảnh / Chọn từ thư viện</span>
+                                <!-- accept image/* capture environment cho phép mở camera trên di động -->
+                                <input type="file" id="prod-image-file" accept="image/*" capture="environment" onchange="handleImageUpload(event)">
+                                <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Bấm để chụp trực tiếp hoặc tải lên từ thư viện</p>
+                            </div>
+                            <img id="image-preview" src="" alt="Xem trước ảnh">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="btn-save" class="submit-btn">💾 Thêm Sản Phẩm Mới Để Khách Xem</button>
+            </form>
+        </div>
+
+        <!-- Products List -->
+        <h2 class="products-title">Danh Sách Sản Phẩm</h2>
+        <div id="products-list" class="products-grid">
+            <p id="loading-text" style="grid-column: 1/-1; text-align: center; color: #666;">⏳ Đang tải danh sách sản phẩm từ hệ thống...</p>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="order-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Xác Nhận Đặt Hàng</h3>
+                <button class="modal-close" onclick="closeOrderModal()">&times;</button>
+            </div>
+            <div>
+                <p style="margin-bottom: 15px; background: #fff3cd; padding: 10px; border-radius: 4px; font-size: 0.9rem;">
+                    Sản phẩm chọn mua: <strong id="modal-prod-name" style="color: #d39e00;"></strong><br>
+                    Giá bán: <strong id="modal-prod-price" style="color: red;"></strong>
+                </p>
+                <form onsubmit="submitOrder(event)">
+                    <div class="form-group">
+                        <label for="cust-name">Họ và tên người nhận *</label>
+                        <input type="text" id="cust-name" required placeholder="Nhập đầy đủ họ tên">
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-phone">Số điện thoại giao hàng *</label>
+                        <input type="tel" id="cust-phone" required placeholder="Nhập số điện thoại">
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-address">Địa chỉ nhận hàng chi tiết *</label>
+                        <textarea id="cust-address" rows="3" required placeholder="Nhập địa chỉ nhận hàng (Số nhà, đường, xã/phường, quận/huyện)"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit-order">💬 GỬI ĐƠN HÀNG QUA ZALO SHOP</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cấu hình Cloud Storage công khai (JSONBin) để 2 máy đều nhìn thấy hàng hóa mới
+        const BIN_ID = "66f368a4e41b4d34e43702a0"; 
+        const API_KEY = "$2a$10$wN1Q/X35cM7d7j5iA/C75./j7LpQnEa8D9fJzL1rN0xV8d.K2Xw6S"; 
+        const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+        const ADMIN_PASS = "652008";
+        const ZALO_PHONE = "0988031223";
+
+        let currentProducts = [];
+        let selectedProduct = null;
+        let imageBase64Data = "";
+
+        // Tải sản phẩm trực tuyến khi mở trang
+        window.onload = function() {
+            fetchProductsFromCloud();
+        };
+
+        // 1. Lấy danh sách sản phẩm từ đám mây
+        function fetchProductsFromCloud() {
+            fetch(API_URL + "/latest", {
+                headers: { "X-Master-Key": API_KEY }
+            })
+            .then(res => res.json())
+            .then(data => {
+                currentProducts = data.record || [];
+                renderProducts();
+            })
+            .catch(err => {
+                console.log("Lỗi tải online, dùng dữ liệu mặc định:", err);
+                renderProducts();
+            });
+        }
+
+        // 2. Hiển thị danh sách ra màn hình
+        function renderProducts() {
+            const container = document.getElementById('products-list');
+            container.innerHTML = "";
+
+            if (currentProducts.length === 0) {
+                container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #888;">Chưa có sản phẩm nào. Vui lòng thêm sản phẩm mới!</p>`;
+                return;
+            }
+
+            currentProducts.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <button class="btn-delete" title="Xóa" onclick="deleteProduct(${index})">✕</button>
+                    <img class="product-image" src="${product.image || 'https://via.placeholder.com/300'}" alt="${product.name}">
+                    <div class="product-details">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">${Number(product.price).toLocaleString('vi-VN')} đ</div>
+                        <button class="btn-buy" onclick="openOrderModal(${index})">🛒 ĐẶT MUA NGAY</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 3. Đăng nhập Admin
+        function toggleAdmin() {
+            const panel = document.getElementById('admin-panel');
+            if (panel.classList.contains('active')) {
+                panel.classList.remove('active');
+                document.body.classList.remove('admin-active');
+            } else {
+                const pass = prompt("Nhập mật khẩu quản trị shop:");
+                if (pass === ADMIN_PASS) {
+                    panel.classList.add('active');
+                    document.body.classList.add('admin-active');
+                } else if (pass !== null) {
+                    alert("Mật khẩu không đúng!");
+                }
+            }
+        }
+
+        // 4. Xử lý Chụp ảnh / Chọn ảnh từ thư viện
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Nén ảnh gọn gàng để upload nhanh
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        const maxWidth = 500;
+                        const scaleSize = maxWidth / img.width;
+                        canvas.width = maxWidth;
+                        canvas.height = img.height * scaleSize;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        
+                        imageBase64Data = canvas.toDataURL('image/jpeg', 0.7);
+                        const preview = document.getElementById('image-preview');
+                        preview.src = imageBase64Data;
+                        preview.style.display = 'block';
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // 5. Thêm sản phẩm mới và ĐẨY LÊN ĐÁM MÂY
+        function addNewProduct(e) {
+            e.preventDefault();
+            const name = document.getElementById('prod-name').value;
+            const price = document.getElementById('prod-price').value;
+            const btnSave = document.getElementById('btn-save');
+
+            if (!imageBase64Data) {
+                alert("Vui lòng chụp ảnh hoặc chọn ảnh sản phẩm từ thư viện!");
+                return;
+            }
+
+            btnSave.disabled = true;
+            btnSave.innerText = "⏳ Đang tải sản phẩm mới lên Cloud...";
+
+            const newProd = {
+                name: name,
+                price: price,
+                image: imageBase64Data
+            };
+
+            const updatedProducts = [newProd, ...currentProducts];
+
+            // Cập nhật lên cloud
+            fetch(API_URL, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Master-Key": API_KEY
+                },
+                body: JSON.stringify(updatedProducts)
+            })
+            .then(res => res.json())
+            .then(data => {
+                currentProducts = updatedProducts;
+                renderProducts();
+                document.getElementById('add-product-form').reset();
+                document.getElementById('image-preview').style.display = 'none';
+                imageBase64Data = "";
+                btnSave.disabled = false;
+                btnSave.innerText = "💾 Thêm Sản Phẩm Mới Để Khách Xem";
+                alert("✅ Đã thêm sản phẩm thành công! Bây giờ TẤT CẢ KHÁCH HÀNG đều sẽ nhìn thấy sản phẩm này.");
+            })
+            .catch(err => {
+                alert("Có lỗi xảy ra khi tải lên đám mây, vui lòng thử lại!");
+                btnSave.disabled = false;
+                btnSave.innerText = "💾 Thêm Sản Phẩm Mới Để Khách Xem";
+            });
+        }
+
+        // 6. Xóa sản phẩm
+        function deleteProduct(index) {
+            if (confirm("Bạn có chắc muốn xóa sản phẩm này khỏi hệ thống?")) {
+                currentProducts.splice(index, 1);
+                fetch(API_URL, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Master-Key": API_KEY
+                    },
+                    body: JSON.stringify(currentProducts)
+                })
+                .then(() => renderProducts());
+            }
+        }
+
+        // 7. Mở Form Đặt Hàng
+        function openOrderModal(index) {
+            selectedProduct = currentProducts[index];
+            document.getElementById('modal-prod-name').innerText = selectedProduct.name;
+            document.getElementById('modal-prod-price').innerText = Number(selectedProduct.price).toLocaleString('vi-VN') + " đ";
+            document.getElementById('order-modal').classList.add('active');
+        }
+
+        function closeOrderModal() {
+            document.getElementById('order-modal').classList.remove('active');
+        }
+
+        // 8. Đặt Hàng & Gửi qua Zalo
+        function submitOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const address = document.getElementById('cust-address').value;
+
+            const message = `Xin chào Công Ty Minh Xuân (NV Phương),\nTôi muốn đặt hàng sản phẩm:\n--------------------\n📦 Sản phẩm: ${selectedProduct.name}\n💰 Giá bán: ${Number(selectedProduct.price).toLocaleString('vi-VN')} đ\n--------------------\nTHÔNG TIN GIAO HÀNG:\n👤 Người nhận: ${name}\n📞 Số điện thoại: ${phone}\n🏠 Địa chỉ: ${address}`;
+
+            const zaloUrl = `https://zalo.me/${ZALO_PHONE}?text=${encodeURIComponent(message)}`;
+            window.open(zaloUrl, '_blank');
+            closeOrderModal();
+        }
+    </script>
+</body>
+</html>
